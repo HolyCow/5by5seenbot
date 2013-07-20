@@ -5,7 +5,7 @@ require 'dm-migrations'
 
 DataMapper::Logger.new($stdout, :debug)
 
-DataMapper.setup(:default, ENV['DATABASE_URL'] || 'postgres://vagrant:vagrant@localhost/5by5seenbot')
+DataMapper.setup(:default, ENV['HEROKU_POSTGRESQL_IVORY_URL'] || 'postgres://vagrant:vagrant@localhost/5by5seenbot')
 
 class Users
   include DataMapper::Resource
