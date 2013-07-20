@@ -12,6 +12,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "apt"
     chef.add_recipe "build-essential"
     chef.add_recipe "postgresql"
+    chef.add_recipe "postgresql::server"
     chef.add_recipe "rvm::system"
     chef.add_recipe "rvm::vagrant"
     chef.add_recipe "rvm::user"
@@ -28,7 +29,17 @@ Vagrant.configure("2") do |config|
           "system_chef_client" => "/opt/chef/bin/chef-client",
           "system_solo_client" => "/opt/chef/bin/chef-solo"
         }
+      },
+      "postgresql" => {
+        "password" => {
+          "postgres" => "thiswilldofornow",
+          "root" => "thiswilldofornow",
+          "vagrant" => "vagrant"
+        }
       }
     }
   end
+
+  config.vm.provision :shell,
+    :inline => "sudo -u vagrant createdb 5by5seenbot"
 end
